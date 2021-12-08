@@ -173,6 +173,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Scripts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -192,6 +193,9 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\User\BorrowedBooks.cshtml" />
+    <Content Include="Views\Book\Dashboard.cshtml" />
+    <Content Include="Views\Book\ViewAll.cshtml" />
+    <Content Include="Views\Book\AddUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -160,5 +160,97 @@ namespace Books_Shop.Controllers
                 return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        // Dashboard
+        public ActionResult Dashboard()
+        {
+          
+            return View();
+        }
+
+        public ActionResult ViewAll()
+        {
+            try
+            {
+                if (Session["UserName"] == null || Session["UserName"].ToString() != "admin")
+                {
+                    return RedirectToAction("Login", "User");
+                }
+
+                string userName = Session["UserName"].ToString();
+
+                List<Book> books = _appDbContext.Books.ToList();
+
+                return View(books);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+            return RedirectToAction("Dashboard");
+        }
+
+
+
+        //GET : AddUpdate
+        public ActionResult AddUpdate(int? Id)
+        {
+            Book currentBook = new Book();
+            if (Id != null)
+            {
+                 currentBook = _appDbContext.Books.FirstOrDefault(b => b.Id == Id);
+
+            }
+            return View(currentBook);
+        }
+
+        //POST : AddUpdate
+        [HttpPost]
+        public ActionResult AddUpdate(Book book)
+        {
+            try
+            {
+                book.CurrentEditions = book.TotalEditions;
+                if(book.Id == 0)
+                {
+                    _appDbContext.Books.Add(book);
+                    _appDbContext.SaveChanges();
+                }
+
+                //Update book
+                else
+                {
+                    _appDbContext.Entry(book).State = EntityState.Modified;
+                    _appDbContext.SaveChanges();
+                }
+                return RedirectToAction("Dashboard");
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+            return View();
+        }
+
+        // Delete
+        public ActionResult Delete(int? Id)
+        {
+            try
+            {
+                var existBook = _appDbContext.Books.FirstOrDefault(b=>b.Id==Id);
+                if (existBook != null)
+                {
+                    _appDbContext.Books.Remove(existBook);
+                    _appDbContext.SaveChanges();
+                }
+                return RedirectToAction("Dashboard");
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+            return RedirectToAction("Dashboard");
+        }
     }
 }

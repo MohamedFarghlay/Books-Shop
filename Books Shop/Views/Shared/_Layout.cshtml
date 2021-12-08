@@ -39,6 +39,19 @@
                             </ul>
                         }
                     }
+                    else if (Session["UserName"].ToString() == "admin" && Session["Code"].ToString() == "Admin2020")
+                    {
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Index", "Dashboard", "Book")</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                            <li>
+                                <label class="usercode" style="margin:15px 0 0 500px; color:wheat;">
+                                    Hi @Session["UserName"].ToString() !
+                                    <span class="hidespan">Your code is <label class="text-danger">@Session["Code"].ToString()</label> </span>
+                                </label>
+                            </li>
+                        </ul>
+                    }
                     else
                     {
                         <ul class="nav navbar-nav">
@@ -74,5 +87,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Scripts.js"></script>
 </body>
 </html>

@@ -110,6 +110,10 @@ namespace Books_Shop.Controllers
                         Session["UserName"] = user.UserName;
                         Session["Id"] = user.Id;
                         Session["Code"] = user.Code;
+                        if(user.UserName =="admin" && user.Code == "Admin2020")
+                        {
+                            return RedirectToAction("Dashboard", "Book");
+                        }
                         return RedirectToAction("Index", "Book");
                     }
                     else if (user == null)
