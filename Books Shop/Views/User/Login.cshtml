@@ -1,0 +1,38 @@
+﻿@model Books_Shop.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<script src="~/Content/main.css"></script>
+
+<div class="wrapper text-justify">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <div class="card-body center-block" , style="margin-top:100px;">
+            @using (Html.BeginForm("Login", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group" style="margin:40px auto ; width:250px;">
+                    <label>User Name</label>
+                    @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control", @placeholder = "User Name" ,required = "required", @style= "margin:0 auto; width:250px; " })
+
+                </div>
+                <div class="form-group" style="margin:40px auto ; width:250px;">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", required = "required", @style = "margin:0 auto; width:250px; " })
+                    <label class="text-danger" style="margin: 10px">
+                        @ViewBag.error
+                    </label>
+                </div>
+                <div class="form-group text-center" style="margin-top:40px;">
+                    <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+

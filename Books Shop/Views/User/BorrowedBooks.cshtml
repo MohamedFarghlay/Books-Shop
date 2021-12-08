@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Books_Shop.Models.UserBooks>
+
+@{
+    ViewBag.Title = "Borrowed Books";
+}
+
+<h2>Borrowed Books</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.books.Name)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.books.Name)
+            </td>
+            <td>
+                <a class="btn btn-primary" onclick="Return('@Url.Action("Return", "Book", new { id=@item.books.Id})')">
+                    Return
+                </a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+
+<script type="text/javascript">
+    function Return(url) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            success: function (response) {
+                if (response.success) {
+                    alert("Returned Successfully")
+                }
+                else {
+                    alert(response.message)
+                }
+            }
+        }
+
+        );
+    }
+</script>

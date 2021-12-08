@@ -1,0 +1,44 @@
+﻿
+@model Books_Shop.Models.User
+
+
+
+@{
+    ViewBag.title = "Register";
+}
+
+
+<script src="~/Content/main.css"></script>
+
+<div class="wrapper text-justify">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <div class="card-body center-block" , style="margin-top:100px;">
+            @using (Html.BeginForm("Register", "User", FormMethod.Post))
+            {
+                //@Html.ValidationSummary()
+                @Html.AntiForgeryToken()
+
+            <div class="form-group" style="margin:40px auto ; width:250px;">
+                <label>User Name</label>
+                @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control", required = "required", @placeholder = "User Name" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "badge badge-danger" })
+            </div>
+            <div class="form-group" style="margin:40px auto ; width:250px;">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", @placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                <label class="text-danger" style="margin: 10px">
+                    @ViewBag.error
+                </label>
+            </div>
+                <div class="form-group text-center" style="margin-top:40px;">
+                    <input type="submit" name="submit" class="btn btn-danger" value="Register" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
